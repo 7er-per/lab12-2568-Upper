@@ -25,16 +25,16 @@ export default function Sidebar() {
       <Box >
         <NavLink
           color="cyan"
-          label={<Text px={5} fz={22} fw={500}>Home</Text>}
-          h={61}
+          label={<Text fz="sm" >Home</Text>}
+          h={41}
           component={RouterNavLink}
           to="/"
           active
         />
         <NavLink
           color="cyan"
-          label={<Text px={5} fz={22} fw={500}>About</Text>}
-          h={61}
+          label={<Text fz="sm" >About</Text>}
+          h={41}
           component={RouterNavLink}
           to="/about"
         />
@@ -44,12 +44,12 @@ export default function Sidebar() {
         </Text> */}
       </Box>
       {/* แสดงผู้ใช้งาน */}
-      <Box px={15} py={15}>
+      <Box px={10} py={10}>
         <Group >
-         <Indicator inline size={16} offset={7} position="bottom-end" color="red" withBorder>
-           <Avatar src="me.PNG" alt="it's me" variant="filled" radius="xl" size="lg" />
+         <Indicator inline  size={12} offset={7} position="bottom-end" color="red" withBorder>
+           <Avatar src="me.PNG" alt="it's me" variant="filled" radius="xl" size="md" />
           </Indicator>
-          <Text px={10} fw={500} fz={25}>
+          <Text  >
             User : Wasawat : Admin
           </Text>
         </Group>

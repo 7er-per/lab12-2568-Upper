@@ -90,25 +90,24 @@ export default function HomePage() {
   
 
   return (
-    <Container size={1050} >
-      <Stack align="center" mt="sm" pb="60px">
-        <Title order={2} fz={40} mt="xl">Todo List</Title>
-        <Text size="sm" c="dimmed" fz={22} m="xs">
+    <Container size="60.5%" >
+      <Stack align="center" mt="lg" pb="25px">
+        <Title order={2} fz="h2" >Todo List</Title>
+        <Text size="sm" c="dimmed" >
           All : {tasks.length} | Done : {tasks.filter((t) => t.isDone).length}
         </Text >
         {/* เพิ่ม Task */}
-        <Button  size="lg" radius="md" color="cyan" onClick={handleAdd}>Add Task</Button>
+        <Button  size="sm"  color="cyan" onClick={handleAdd}>Add Task</Button>
         {/* แสดง Task Cards */}
         <Stack align="center"  w="100%">
             {tasks.map((task) => (
               <Card
                 withBorder
                 shadow="sm"
-                radius="lg"
+                radius="md"
                 key={task.id}
-                mih={150}
-                py={25}
-                m="sm"
+                mih={60}
+                mb="xs"
                 w="100%"  
               >
         <Group justify="space-between" align="flex-start" h="100%">
@@ -116,38 +115,37 @@ export default function HomePage() {
                 <Text
                   fw={600}
                   td={task.isDone ? "line-through" : "none"}
-                  fz={27}
-                  px={10}
+                  size="lg"
                 >
                   {task.title}
                 </Text>
 
-                <Text size="xl" c="dimmed" px={10}>
+                <Text  c="dimmed" size="sm">
                   {task.description}
                 </Text>
                 {task.dueDate && (
-                  <Text size="xl" c="gray" px={10}>
+                  <Text size="xs" c="gray" >
                     Due: {task.dueDate.toLocaleDateString()}
                   </Text>
                 )}
                 {task.doneTime && (
-                  <Text fz={18} c="yellow" px={10}>
+                  <Text size="xs" c="upper" >
                     Done at: {task.doneTime.toLocaleString()}
                   </Text>
                 )}
           </Stack>
 
-          <Group>
+          <Group align="center">
             <Checkbox
               checked={task.isDone}
               onChange={() => toggleDoneTask(task.id)}
-              color="blue"
-              size="xl"
-              label={<Text fz="h3" >Done</Text>}
+              color="cyan"
+              
+              label={<Text size="sm"  >Done</Text>}
             />
 
-            <ActionIcon variant="light" size="xl" color="red" aria-label="Settings" onClick={() => deleteTask(task.id)} > 
-              <IconTrash style={{ width: '70%', height: '70%' }} stroke={2} /> 
+            <ActionIcon variant="light"  color="red" aria-label="Settings" onClick={() => deleteTask(task.id)} > 
+              <IconTrash style={{ width: '69%', height: '69%' }} stroke={2} /> 
             </ActionIcon>
           </Group>
         </Group>

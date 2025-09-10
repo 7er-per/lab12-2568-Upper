@@ -11,9 +11,9 @@ export default function MainLayout() {
   return (
     <AppShell
       padding="md"
-      header={{ height: 105 }}
-      navbar={{ width: 450, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      footer={{ height: 75 }}
+      header={{ height: 70 }}
+      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      footer={{ height: 50 }}
     >
       <AppShell.Header>
         <HeaderComponent opened={opened} toggle={toggle} />
