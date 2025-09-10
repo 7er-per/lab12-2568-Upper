@@ -11,9 +11,9 @@ export default function MainLayout() {
   return (
     <AppShell
       padding="md"
-      header={{ height: 70 }}
-      navbar={{ width: 300, breakpoint: "sm", collapsed: { mobile: !opened } }}
-      footer={{ height: 50 }}
+      header={{ height: 105 }}
+      navbar={{ width: 450, breakpoint: "sm", collapsed: { mobile: !opened } }}
+      footer={{ height: 75 }}
     >
       <AppShell.Header>
         <HeaderComponent opened={opened} toggle={toggle} />
@@ -26,8 +26,8 @@ export default function MainLayout() {
       <AppShell.Footer>
         <FooterComponent
           year="2025"
-          fullName="chanadda"
-          studentId="670612039"
+          fullName="wasawat"
+          studentId="670610731"
         />
       </AppShell.Footer>
 

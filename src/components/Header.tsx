@@ -21,8 +21,8 @@ export default function HeaderComponent({
   const isDark = colorScheme === "dark";
   const isMobile = useMediaQuery("(max-width: 768px)");
   return (
-    <Group p="md" justify="space-between">
-      <Group>
+    <Group p="md" justify="space-between" align="center" w="100%" h="100%">
+      <Group >
         {isMobile && (
           <Burger
             opened={opened}
@@ -30,17 +30,17 @@ export default function HeaderComponent({
             aria-label="Toggle navigation"
           />
         )}
-        <Title order={3}>🚀 My App Header</Title>
+        <Title order={3} size={33} px={10} py={5}>🚀 My App Header</Title>
       </Group>
-      <Group gap={5}>
+      <Group gap={5} align="center">
         <ActionIcon
           variant="filled"
           color={isDark ? "yellow" : "blue"}
           onClick={toggleColorScheme}
-          size="lg"
+          size={50}
           aria-label={isDark ? "Light mode" : "Dark mode"}
         >
-          {isDark ? <IconSun size={20} /> : <IconMoon size={20} />}
+          {isDark ? <IconSun size={28} /> : <IconMoon size={28} />}
         </ActionIcon>
       </Group>
     </Group>

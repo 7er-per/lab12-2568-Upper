@@ -10,9 +10,9 @@ import {
 } from "@mantine/core";
 interface SidebarComponentProps  {
   userName: string;
-  type?: "admin" |"student";
+  type: "admin" |"student";
 }
-export type { SidebarProps };
+export type { SidebarComponentProps };
 export default function Sidebar() {
   return (
     <Stack
@@ -22,17 +22,19 @@ export default function Sidebar() {
       style={{ height: "100%" }}
     >
       {/* Menu / เมนู*/}
-      <Box>
+      <Box >
         <NavLink
           color="cyan"
-          label="Home"
+          label={<Text px={5} fz={22} fw={500}>Home</Text>}
+          h={61}
           component={RouterNavLink}
           to="/"
           active
         />
         <NavLink
           color="cyan"
-          label="About"
+          label={<Text px={5} fz={22} fw={500}>About</Text>}
+          h={61}
           component={RouterNavLink}
           to="/about"
         />
@@ -42,8 +44,15 @@ export default function Sidebar() {
         </Text> */}
       </Box>
       {/* แสดงผู้ใช้งาน */}
-      <Box p={10}>
-        <Text>chanadda</Text>
+      <Box px={15} py={15}>
+        <Group >
+         <Indicator inline size={16} offset={7} position="bottom-end" color="red" withBorder>
+           <Avatar src="me.PNG" alt="it's me" variant="filled" radius="xl" size="lg" />
+          </Indicator>
+          <Text px={10} fw={500} fz={25}>
+            User : Wasawat : Admin
+          </Text>
+        </Group>
       </Box>
     </Stack>
   );

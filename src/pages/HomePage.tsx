@@ -20,7 +20,10 @@ interface Task {
   description: string;
   isDone: boolean;
   dueDate: Date | null;
+  doneTime: Date | null;
 }
+
+
 
 export default function HomePage() {
   const [tasks, setTasks] = useState<Task[]>([
@@ -30,6 +33,7 @@ export default function HomePage() {
       description: "Vite + React + Mantine + TS",
       isDone: false,
       dueDate: new Date(),
+      doneTime: null,
     },
     {
       id: "2",
@@ -37,6 +41,7 @@ export default function HomePage() {
       description: "Finish project for class",
       isDone: false,
       dueDate: new Date(),
+      doneTime: null,
     },
     {
       id: "3",
@@ -44,6 +49,7 @@ export default function HomePage() {
       description: "Push project to GitHub Pages",
       isDone: false,
       dueDate: new Date(),
+      doneTime: null,
     },
   ]);
   const lorem = new LoremIpsum({
@@ -64,6 +70,7 @@ export default function HomePage() {
       description: lorem.generateWords(10),
       isDone: false,
       dueDate: new Date(),
+      doneTime: null,
     };
     setTasks((prev) => [...prev, newTask]);
   };
@@ -76,72 +83,77 @@ export default function HomePage() {
   // Toggle done
   const toggleDoneTask = (taskId: string) => {
     setTasks((prev) =>
-      prev.map((t) => (t.id === taskId ? { ...t, isDone: !t.isDone } : t))
+      prev.map((t) => (t.id === taskId ? { ...t, isDone: !t.isDone, doneTime: !t.isDone ? new Date() : null} : t))
     );
   };
 
-  return (
-    <Container size="sm" py="lg">
-      <Stack align="center">
-        <Title order={2}>Todo List</Title>
-        <Text size="sm" c="dimmed">
-          All : {tasks.length} | Done : {tasks.filter((t) => t.isDone).length}
-        </Text>
-        {/* เพิ่ม Task */}
-        <Button onClick={handleAdd}>Add Task</Button>
-        {/* แสดง Task Cards */}
-        <Stack w="100%">
-          {tasks.map((task) => (
-            <Card withBorder shadow="sm" radius="md" mb="sm" key={task.id}>
-              <Group justify="space-between" align="flex-start">
-                <Stack>
-                  <Text
-                    fw={600}
-                    td={task.isDone ? "line-through" : "none"}
-                    size="lg"
-                  >
-                    {task.title}
-                  </Text>
+  
 
-                  <Text size="sm" c="dimmed">
-                    {task.description}
+  return (
+    <Container size={1050} >
+      <Stack align="center" mt="sm" pb="60px">
+        <Title order={2} fz={40} mt="xl">Todo List</Title>
+        <Text size="sm" c="dimmed" fz={22} m="xs">
+          All : {tasks.length} | Done : {tasks.filter((t) => t.isDone).length}
+        </Text >
+        {/* เพิ่ม Task */}
+        <Button  size="lg" radius="md" color="cyan" onClick={handleAdd}>Add Task</Button>
+        {/* แสดง Task Cards */}
+        <Stack align="center"  w="100%">
+            {tasks.map((task) => (
+              <Card
+                withBorder
+                shadow="sm"
+                radius="lg"
+                key={task.id}
+                mih={150}
+                py={25}
+                m="sm"
+                w="100%"  
+              >
+        <Group justify="space-between" align="flex-start" h="100%">
+              <Stack justify="space-between" h="100%">
+                <Text
+                  fw={600}
+                  td={task.isDone ? "line-through" : "none"}
+                  fz={27}
+                  px={10}
+                >
+                  {task.title}
+                </Text>
+
+                <Text size="xl" c="dimmed" px={10}>
+                  {task.description}
+                </Text>
+                {task.dueDate && (
+                  <Text size="xl" c="gray" px={10}>
+                    Due: {task.dueDate.toLocaleDateString()}
                   </Text>
-                  {task.dueDate && (
-                    <Text size="xs" c="gray">
-                      Due: {task.dueDate.toLocaleDateString()}
-                    </Text>
-                  )}
-                  {/* แสดง Date & Time */}
-                  <Text size="xs" c="gray">
-                    Done at:
+                )}
+                {task.doneTime && (
+                  <Text fz={18} c="yellow" px={10}>
+                    Done at: {task.doneTime.toLocaleString()}
                   </Text>
-                </Stack>
-                {/* แสดง Button Done & Button Delete */}
-                <Group>
-                  <Button
-                    style={{
-                      backgroundColor: "#71c32fda",
-                      color: "#dce6e7ff",
-                    }}
-                    variant="light"
-                    size="xs"
-                    onClick={() => toggleDoneTask(task.id)}
-                  >
-                    Done
-                  </Button>
-                  <Button
-                    color="chanadda"
-                    variant="light"
-                    size="xs"
-                    onClick={() => deleteTask(task.id)}
-                  >
-                    Delete
-                  </Button>
-                </Group>
-              </Group>
-            </Card>
-          ))}
-        </Stack>
+                )}
+          </Stack>
+
+          <Group>
+            <Checkbox
+              checked={task.isDone}
+              onChange={() => toggleDoneTask(task.id)}
+              color="blue"
+              size="xl"
+              label={<Text fz="h3" >Done</Text>}
+            />
+
+            <ActionIcon variant="light" size="xl" color="red" aria-label="Settings" onClick={() => deleteTask(task.id)} > 
+              <IconTrash style={{ width: '70%', height: '70%' }} stroke={2} /> 
+            </ActionIcon>
+          </Group>
+        </Group>
+      </Card>
+    ))}
+  </Stack>
       </Stack>
     </Container>
   );
